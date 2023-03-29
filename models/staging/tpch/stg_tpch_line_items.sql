@@ -11,9 +11,9 @@ renamed as (
         {{ dbt_utils.surrogate_key(
             ['l_orderkey', 
             'l_linenumber']) }}
-                as order_item_key,
-        l_orderkey as order_key,
-        l_partkey as part_key,
+                as order_item_key11,
+        l_orderkey as order_key22,
+        l_partkey as part_key11,
         l_suppkey as supplier_key,
         l_linenumber as line_number,
         l_quantity as quantity,

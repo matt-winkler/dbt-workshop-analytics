@@ -60,3 +60,6 @@ seeds:
       +column_types:
         effective_date: DATE
         rate: NUMBER   
+
+snapshots:
+  +target_schema: snapshots_dev
