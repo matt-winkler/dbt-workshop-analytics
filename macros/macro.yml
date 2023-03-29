@@ -63,3 +63,10 @@ macros:
       - name: return_fields
         type: STRING
         description: fields you would like returned for analysis
+
+  - name: clone_prod_to_target
+    description: Macro to clone Data from a variable schema into the target schema, used in CI jobs
+    arguments:
+      - name: from
+        type: STRING
+        description: Where data should be copied from
