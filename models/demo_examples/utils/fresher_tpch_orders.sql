@@ -17,10 +17,7 @@ rename as (
 
     select
     
-        {{ dbt_utils.surrogate_key(
-            ['o_orderkey', 
-            'getdate()']) }}
-                as o_orderkey,
+        o_orderkey,
         o_custkey,
         o_orderstatus,
         o_totalprice,
@@ -41,7 +38,10 @@ rename as (
             as o_inserted_at
 
     from source
-    
+    {% if is_incremental() %}
+        -- we limit the data so we keep some older data on append
+        limit 500
+    {% endif %}
 
 )
 
