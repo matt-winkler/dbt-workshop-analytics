@@ -59,7 +59,7 @@ seeds:
     snowflake_contract_rates:
       +column_types:
         effective_date: DATE
-        rate: NUMBER   
+        rate: NUMBER
 
 snapshots:
   +target_schema: snapshots_dev
