@@ -52,6 +52,9 @@ models:
     marts:
       core:
         materialized: table
+    
+    demo_examples:
+      +snowflake_warehouse: "LOADING"
 
       
 seeds:
