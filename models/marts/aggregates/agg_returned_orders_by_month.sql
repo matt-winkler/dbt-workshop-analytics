@@ -4,7 +4,7 @@ with fct_order_items as (
 
 final as (
     select
-        date_trunc(MONTH, fct_order_items.order_date) as order_month
+        date_trunc(MONTH, fct_order_items.order_date) as order_month 
         , count(case when is_return then order_item_key else null end) as returned_orders
         , 1.0* returned_orders / nullif (
             count(order_item_key)
