@@ -3,7 +3,7 @@ name: Sync main branches
 on:
   push:
     branches:
-      - main-na
+      - main
 
 jobs:
   sync:
@@ -24,3 +24,9 @@ jobs:
 
     - name: Push changes to main-apac
       run: git push origin main-apac
+
+    - name: Merge to main-na
+      run: git checkout main-na && git merge --no-ff ${{ github.ref }}
+
+    - name: Push changes to main-na
+      run: git push origin main-na
