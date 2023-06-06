@@ -1,0 +1,26 @@
+name: Sync main branches
+
+on:
+  push:
+    branches:
+      - main-na
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Merge to main-emea
+      run: git checkout main-emea && git merge --no-ff ${{ github.ref }}
+
+    - name: Push changes to main-emea
+      run: git push origin main-emea
+
+    - name: Merge to main-apac
+      run: git checkout main-apac && git merge --no-ff ${{ github.ref }}
+
+    - name: Push changes to main-apac
+      run: git push origin main-apac
