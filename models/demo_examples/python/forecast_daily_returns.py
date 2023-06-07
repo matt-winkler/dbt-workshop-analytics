@@ -20,6 +20,6 @@ def model( dbt, session ):
     
     return df # return final dataset via data frame. This is required. 
 
-# The Preview button in the IDE is disabled, but you can iterate by building the object and then opening a new tab and running... select * from {{ ref('forecast_daily_returns') }}
+# The Preview button in the IDE is disabled, but you can iterate by building the object and then opening a new tab and running... select * from ref('forecast_daily_returns')
 # Tests and Documentation can also be applied to python models, in the same manner as sql models (.yml file or custom tests). 
 
