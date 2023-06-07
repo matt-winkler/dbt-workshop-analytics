@@ -17,7 +17,7 @@ jobs:
       run: git checkout -B main-emea && git merge --no-ff ${{ github.ref }}
 
     - name: Push changes to main-emea
-      run: git push origin main:main-emea
+      run: git push -f origin main:main-emea
 
     - name: Merge to main-apac
       run: git checkout -B main-apac && git merge --no-ff ${{ github.ref }}
