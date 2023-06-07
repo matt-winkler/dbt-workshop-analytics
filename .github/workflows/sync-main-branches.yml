@@ -14,19 +14,19 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Merge to main-emea
-      run: git checkout main-emea && git merge --no-ff ${{ github.ref }}
+      run: git checkout -B main-emea && git merge --no-ff ${{ github.ref }}
 
     - name: Push changes to main-emea
       run: git push origin main-emea
 
     - name: Merge to main-apac
-      run: git checkout main-apac && git merge --no-ff ${{ github.ref }}
+      run: git checkout -B main-apac && git merge --no-ff ${{ github.ref }}
 
     - name: Push changes to main-apac
       run: git push origin main-apac
 
     - name: Merge to main-na
-      run: git checkout main-na && git merge --no-ff ${{ github.ref }}
+      run: git checkout -B main-na && git merge --no-ff ${{ github.ref }}
 
     - name: Push changes to main-na
       run: git push origin main-na
