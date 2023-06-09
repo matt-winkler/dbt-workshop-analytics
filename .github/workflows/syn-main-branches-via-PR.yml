@@ -46,6 +46,7 @@ jobs:
           # git config user.email "$pr_author_email"
           
           git checkout -b sync-main-emea
+          git pull origin main-emea
           git push origin sync-main-emea
           hub pull-request -b main-emea -h sync-main-emea -m "Sync from main->main-emea from PR #${original_pr_number}"
 
