@@ -20,32 +20,40 @@ jobs:
           sudo snap install hub --classic
           echo "github.com:\n- oauth_token: \${{ secrets.GITHUB_TOKEN }}" >> ~/.config/hub
 
-      - name: Get PR author's name and email
+      - name: Get PR information
         id: get_pr_author
         run: |
-          echo "::set-output name=name::$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login')"
-          echo "::set-output name=email::$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login') | jq -r '.email')"
-
+          echo "name=$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login')" >> $GITHUB_OUTPUT
+          echo "email=$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login') | jq -r '.email')" >> $GITHUB_OUTPUT
+          echo "original_pr_number=${{ github.event.pull_request.number }} >> $GITHUB_OUTPUT
+         
+          # echo "::set-output name=name::$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login')"
+          # echo "::set-output name=email::$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login') | jq -r '.email')"
+          # echo "::set-output name=original_pr_number::${{ github.event.pull_request.number }}"
+          
       - name: Open PR to main-emea
         run: |
-          git config user.name "${{ steps.get_pr_author.outputs.name }}"
-          git config user.email "${{ steps.get_pr_author.outputs.email }}"
+          original_pr_number=${{ steps.get_original_pr_number.outputs.original_pr_number }}
+          # git config user.name "${{ steps.get_pr_author.outputs.name }}"
+          # git config user.email "${{ steps.get_pr_author.outputs.email }}"
           git checkout -b sync-main-emea
           git push origin sync-main-emea
-          hub pull-request -b main-emea -h sync-main-emea -m "Sync from main->main-emea"
+          hub pull-request -b main-emea -h sync-main-emea -m "Sync from main->main-emea from PR #${original_pr_number}"
 
       - name: Open PR to main-apac
         run: |
+          original_pr_number=${{ steps.get_original_pr_number.outputs.original_pr_number }}
           git config user.name "${{ steps.get_pr_author.outputs.name }}"
           git config user.email "${{ steps.get_pr_author.outputs.email }}"
           git checkout -b sync-main-apac
           git push origin sync-main-apac
-          hub pull-request -b main-apac -h sync-main-apac -m "Sync from main->main-apac"
+          hub pull-request -b main-apac -h sync-main-apac -m "Sync from main->main-apac from PR #${original_pr_number}"
 
       - name: Open PR to main-na
         run: |
+          original_pr_number=${{ steps.get_original_pr_number.outputs.original_pr_number }}
           git config user.name "${{ steps.get_pr_author.outputs.name }}"
           git config user.email "${{ steps.get_pr_author.outputs.email }}"
           git checkout -b sync-main-na
           git push origin sync-main-na
-          hub pull-request -b main-na -h sync-main-na -m "Sync from main->main-na"
+          hub pull-request -b main-na -h sync-main-na -m "Sync from main->main-na from PR #${original_pr_number}"
