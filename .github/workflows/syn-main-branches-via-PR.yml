@@ -19,24 +19,34 @@ jobs:
         run: |
           sudo snap install hub --classic
           echo "github.com:\n- oauth_token: \${{ secrets.GITHUB_TOKEN }}" >> ~/.config/hub
-
-      - name: Get PR information
-        id: get_pr_author
+          
+      - name: Get original PR's info
+        id: get_original_pr_info
         run: |
-          echo "name=$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login')" >> $GITHUB_OUTPUT
-          echo "email=$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login') | jq -r '.email')" >> $GITHUB_OUTPUT
-          echo "original_pr_number=${{ github.event.pull_request.number }} >> $GITHUB_OUTPUT
-         
-          # echo "::set-output name=name::$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login')"
-          # echo "::set-output name=email::$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login') | jq -r '.email')"
-          # echo "::set-output name=original_pr_number::${{ github.event.pull_request.number }}"
+          token=${{ secrets.GITHUB_TOKEN }}
+          pr_info=$(curl -s -H "Authorization: token $token" https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }})
+
+          author_login=$(echo "$pr_info" | jq -r '.user.login')
+          echo "name=$author_login" >> $GITHUB_ENV
+
+          email=$(curl -s -H "Authorization: token $token" https://api.github.com/users/$author_login/emails | jq -r '.[0].email')
+          echo "email=$email" >> $GITHUB_ENV
+
+          original_pr_number=$(echo "$pr_info" | jq -r '.number')
+          echo "original_pr_number=$original_pr_number" >> $GITHUB_ENV
+
           
       - name: Open PR to main-emea
         run: |
-          original_pr_number=${{ steps.get_original_pr_number.outputs.original_pr_number }}
-          # git config user.name "${{ steps.get_pr_author.outputs.name }}"
-          # git config user.email "${{ steps.get_pr_author.outputs.email }}"
+          original_pr_number=${{ env.original_pr_number }}
+          pr_author_name=${{ env.name }}
+          pr_author_email=${{ env.email }}
+
+          # git config user.name "$pr_author_name"
+          # git config user.email "$pr_author_email"
+          
           git checkout -b sync-main-emea
+          git pull origin main-emea
           git push origin sync-main-emea
           hub pull-request -b main-emea -h sync-main-emea -m "Sync from main->main-emea from PR #${original_pr_number}"
 
