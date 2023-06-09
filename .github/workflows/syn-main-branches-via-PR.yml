@@ -1,0 +1,51 @@
+name: Sync branches
+
+on:
+  pull_request:
+    types:
+      - closed
+      
+      
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install and configure hub
+        run: |
+          sudo snap install hub --classic
+          echo "github.com:\n- oauth_token: \${{ secrets.GITHUB_TOKEN }}" >> ~/.config/hub
+
+      - name: Get PR author's name and email
+        id: get_pr_author
+        run: |
+          echo "::set-output name=name::$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login')"
+          echo "::set-output name=email::$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login') | jq -r '.email')"
+
+      - name: Open PR to main-emea
+        run: |
+          git config user.name "${{ steps.get_pr_author.outputs.name }}"
+          git config user.email "${{ steps.get_pr_author.outputs.email }}"
+          git checkout -b sync-main-emea
+          git push origin sync-main-emea
+          hub pull-request -b main-emea -h sync-main-emea -m "Sync from main->main-emea"
+
+      - name: Open PR to main-apac
+        run: |
+          git config user.name "${{ steps.get_pr_author.outputs.name }}"
+          git config user.email "${{ steps.get_pr_author.outputs.email }}"
+          git checkout -b sync-main-apac
+          git push origin sync-main-apac
+          hub pull-request -b main-apac -h sync-main-apac -m "Sync from main->main-apac"
+
+      - name: Open PR to main-na
+        run: |
+          git config user.name "${{ steps.get_pr_author.outputs.name }}"
+          git config user.email "${{ steps.get_pr_author.outputs.email }}"
+          git checkout -b sync-main-na
+          git push origin sync-main-na
+          hub pull-request -b main-na -h sync-main-na -m "Sync from main->main-na"
