@@ -19,24 +19,15 @@ jobs:
         run: |
           sudo snap install hub --classic
           echo "github.com:\n- oauth_token: \${{ secrets.GITHUB_TOKEN }}" >> ~/.config/hub
-          
-      - name: Get original PR's info
-        id: get_original_pr_info
-        run: |
-          echo "name=$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login')" >> $GITHUB_OUTPUT
 
-          
       - name: Open PR to main-emea
         run: |
-          pr_author_name=${{ env.name }}
-
-          # git config user.name "$pr_author_name"
-          # git config user.email "$pr_author_email"
+          # pr_author_name=${{ env.name }}
           
           git checkout -b sync-main-emea
-          git pull origin main-emea
+          git pull --rebase origin main-emea
           git push origin sync-main-emea
-          hub pull-request -b main-emea -h sync-main-emea -m "Sync from main->main-emea from PR #${{ github.event.pull_request.number }}"
+          hub pull-request -b main-emea -h sync-main-emea -m "Sync from main->main-emea from PR #${{ github.event.pull_request.number }}" -a ${{ github.event.pull_request.sender }} 
 
       - name: Open PR to main-apac
         run: |
