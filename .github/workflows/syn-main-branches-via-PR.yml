@@ -23,19 +23,12 @@ jobs:
       - name: Get original PR's info
         id: get_original_pr_info
         run: |
-          token=${{ secrets.GITHUB_TOKEN }}
-          pr_info=$(curl -s -H "Authorization: token $token" https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }})
-
           echo "name=$(curl -s -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.user.login')" >> $GITHUB_OUTPUT
-
-          email=$(curl -s -H "Authorization: token $token" https://api.github.com/users/$author_login/emails | jq -r '.[0].email')
-          echo "email=$email" >> $GITHUB_ENV
 
           
       - name: Open PR to main-emea
         run: |
           pr_author_name=${{ env.name }}
-          pr_author_email=${{ env.email }}
 
           # git config user.name "$pr_author_name"
           # git config user.email "$pr_author_email"
