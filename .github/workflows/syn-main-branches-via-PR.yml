@@ -25,7 +25,8 @@ jobs:
           # pr_author_name=${{ env.name }}
           
           git checkout -b sync-main-emea
-          git pull --rebase origin main-emea
+          git merge --no-ff origin/main-emea -m "Sync from PR #${original_pr_number} - ${{ github.event.pull_request.title }}"
+          #git pull --rebase origin main-emea
           git push origin sync-main-emea
           hub pull-request -b main-emea -h sync-main-emea -m "Sync from main->main-emea from PR #${{ github.event.pull_request.number }}" -a ${{ github.event.pull_request.sender }} 
 
