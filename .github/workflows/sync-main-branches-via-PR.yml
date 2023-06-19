@@ -9,7 +9,8 @@ on:
 jobs:
   if_merged:
      # Only run the job if the pull request was merged and merged into the `main` branch
-    if: github.event.pull_request.merged == true && github.ref == 'refs/heads/main'
+    if: github.event.pull_request.merged == true 
+    # && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
