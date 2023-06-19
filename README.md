@@ -8,6 +8,7 @@ Welcome to the dbt Labs demo dbt project! We use the [TPCH dataset](https://docs
 
 ## Special demos
 You can find all demos vignettes in our [notion page](https://www.notion.so/dbtlabs/SA-Demo-Assets-fa6e16d0a9de4c07ba7511165958eea5?pvs=4)
+If you have questions or feedback, reach out to #topic-sa-demo-assets
 
 - **dbt-external-tables:** Manage database objects that read data external to the warehouse within dbt. See `models/demo_examples/external_sources.yml`.
 - **Lifecycle Notifications:** See examples of dbt Cloud Job Lifecycle Notifications [here](https://gist.github.com/boxysean/3166b3ac55801685b6d275e9a9ddd5ee).
