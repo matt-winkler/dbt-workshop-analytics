@@ -18,4 +18,5 @@ jobs:
       - name: Open PR to main-emea
         run: |
           gh pr create -B main-emea -H main -t "Sync from main->main-emea from PR #${{ github.event.pull_request.number }}" -b "sync PR" 
-        
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
