@@ -74,6 +74,13 @@ models:
         description: '{{ doc("account_balance") }}'
  
   - name: fct_order_items
+    tests:
+    - dbt_expectations.expect_table_aggregation_to_equal_other_table:
+        name: orders_sales_amount_equals_order_item_sales_amount
+        expression: sum(net_item_sales_amount)
+        compare_model: ref("fct_orders")
+        compare_expression: sum(net_item_sales_amount)
+        group_by: [order_key]
     description: order items fact table
     columns:
       - name: order_item_key
