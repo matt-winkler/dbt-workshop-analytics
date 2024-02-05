@@ -12,7 +12,6 @@ final as (
         ) as return_rate
         , count(*) as row_count
     from fct_order_items
-    where fct_order_items.order_date < '1995-03-31'
     group by 1
     order by 1 desc
 )
