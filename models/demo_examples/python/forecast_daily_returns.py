@@ -5,7 +5,7 @@ def model( dbt, session ):
     
     dbt.config(
         materialized="table", # the incremental materialization is also supported
-        packages=['pandas','Prophet'] # how to import python libraries in dbt's context
+        packages=['pandas==1.5.3','Prophet','holidays==0.18'] # how to import python libraries in dbt's context
     )
 
     # use historical data to fit model
