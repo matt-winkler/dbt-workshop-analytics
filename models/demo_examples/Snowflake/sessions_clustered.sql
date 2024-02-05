@@ -11,5 +11,6 @@ select
   max(o_orderdate) as session_end,
   count(*) as count_pageviews
 
-from {{ source('tpch', 'orders') }}
+from 
+{{ source('tpch_now', 'orders') }}
 group by 1
