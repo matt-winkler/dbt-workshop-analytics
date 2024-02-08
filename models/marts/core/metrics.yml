@@ -86,7 +86,7 @@ saved_queries:
         - total_revenue
         - total_expense
         - total_profit
-        - total_customers
+
       group_by:
         - TimeDimension('metric_time', 'day')
         - Dimension('customer__region')
