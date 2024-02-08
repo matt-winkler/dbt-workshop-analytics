@@ -103,7 +103,7 @@ saved_queries:
       metrics:
         - cumulative_revenue_ttm
       group_by:
-        - TimeDimension('metric_time', 'day')
+        - timedimension('metric_time', 'day')
     exports:
       - name: cumulative_revenue
         config:
