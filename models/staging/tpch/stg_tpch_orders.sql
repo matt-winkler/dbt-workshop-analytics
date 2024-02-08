@@ -1,7 +1,7 @@
 
 with source as (
 
-    select * from {{ source('fresh_source', 'orders') }}
+    select * from {{ source('tpch_now', 'orders') }}
 
 ),
 
