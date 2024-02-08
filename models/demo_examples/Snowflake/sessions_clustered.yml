@@ -1,9 +1,0 @@
-version: 2
-
-models:
-  - name: sessions_clustered
-    description: A model that has a cluster key pre-defined to minimize the work of Snowflake's auto-clustering
-
-    columns:
-      - name: session_start
-        description: The field we want to cluster by 
