@@ -24,7 +24,7 @@ metrics:
     type_params:
       measure: total_customers
 
-  # Cumulative metric
+  # Cumulative metrics
   - name: cumulative_revenue_total
     description: The cumulative revenue for the business
     type: cumulative
