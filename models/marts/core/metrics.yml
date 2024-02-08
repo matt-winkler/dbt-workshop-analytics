@@ -79,7 +79,7 @@ metrics:
           alias: expense
 
 saved_queries:
-  - name: sales_metrics_by_region
+  - name: metrics_sales_by_region
     description: Relevant sales metrics by region
     query_params:
       metrics:
@@ -95,8 +95,9 @@ saved_queries:
       - name: sales_metrics_by_region
         config:
           export_as: table
+          schema: aa_metrics
 
-  - name: cumulative_revenue_total
+  - name: metrics_cumulative_revenue_total
     description: Cumulative total revenue
     query_params:
       metrics:
@@ -107,6 +108,7 @@ saved_queries:
       - name: cumulative_revenue
         config:
           export_as: table
+          schema: aa_metrics
       
 
 
