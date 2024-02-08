@@ -63,6 +63,7 @@ semantic_models:
         description: The market segment the customer belongs to
         type: categorical
         expr: market_segment
+
       - name: customer_balance_segment
         description: Bucketing customers by their account balance
         type: categorical
@@ -73,10 +74,12 @@ semantic_models:
             when account_balance < 7500 then 'Medium'
             else 'High'
           end
+
       - name: nation
         description: The nation the customer belongs to
         type: categorical
         expr: nation
+        
       - name: region
         description: The region the customer belongs to
         type: categorical
