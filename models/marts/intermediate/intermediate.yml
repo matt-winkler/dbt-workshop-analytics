@@ -117,21 +117,21 @@ unit_tests:
     given:
       - input: ref('stg_tpch_customers')
         rows:
-          - {customer_key: 214}
+          - {customer_key: 629}
           - {customer_key: 4}
           - {customer_key: 1}
           - {customer_key: 26}
 
       - input: ref('stg_tpch_orders')
         rows:
-          - {customer_key: 214, total_price: 4674899}
+          - {customer_key: 629, total_price: 163443}
           - {customer_key: 4, total_price: 4134568}
           - {customer_key: 1,  total_price: 1428872}
           - {customer_key: 26, total_price: 418512}
 
     expect:
       rows:
-        - {customer_key: 214,  tier_name: tier1}
+        - {customer_key: 629,  tier_name: tier1}
         - {customer_key: 4,    tier_name: tier2}
         - {customer_key: 1,    tier_name: tier3}
         - {customer_key: 26,   tier_name: tier4}
