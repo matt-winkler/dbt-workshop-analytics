@@ -81,6 +81,9 @@ metrics:
 saved_queries:
   - name: metrics_sales_by_region
     description: Relevant sales metrics by region
+    config:
+      cache:
+        enabled: true
     query_params:
       metrics:
         - total_revenue
