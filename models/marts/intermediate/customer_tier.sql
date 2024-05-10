@@ -16,7 +16,7 @@ final as (
         customer.customer_key,
         sum(orders.total_price) as lifetime_value,
         case 
-            when rank() over (order by lifetime_value desc) <=20 then 'tier1'
+            when lifetime_value <= 200000 then 'tier1'
             when lifetime_value > 2000000 then 'tier2'
             when lifetime_value between 1000000 and 1999999 then 'tier3'
             when lifetime_value between 0 and 999999 then 'tier4' 
