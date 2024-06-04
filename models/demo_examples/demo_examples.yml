@@ -8,7 +8,7 @@ models:
     description: demo to show incremental model
     columns:
       - name: customer_key
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -16,12 +16,9 @@ models:
     description: demo to show variables
     columns:
       - name: order_item_key
-        tests:
+        data_tests:
           - unique
           - not_null 
-
-  - name: get_area_of_circle
-    description: demo to show udfs
 
   - name: forecast_daily_returns
     description: "Returned orders forecast generated using Prophet predictive model"

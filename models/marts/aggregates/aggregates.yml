@@ -17,7 +17,7 @@ models:
   - name: monthly_gross_revenue
     columns:
       - name: order_month
-        tests:
+        data_tests:
           - unique
 
 exposures:

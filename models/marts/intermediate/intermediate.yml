@@ -8,7 +8,7 @@ models:
     columns:
       - name: order_item_key
         description: '{{ doc("order_item_key") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: order_key
@@ -65,7 +65,7 @@ models:
     columns:
       - name: part_supplier_key
         description: primary key of the models
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: part_key
@@ -105,7 +105,7 @@ models:
     description: puts customers into tiers (1-4)
     columns:
       - name: customer_key
-        tests:
+        data_tests:
           - unique
       - name: lifetime_value
       - name: tier_name
