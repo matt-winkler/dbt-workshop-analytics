@@ -20,9 +20,6 @@ models:
           - unique
           - not_null 
 
-  - name: get_area_of_circle
-    description: demo to show udfs
-
   - name: forecast_daily_returns
     description: "Returned orders forecast generated using Prophet predictive model"
     columns:
