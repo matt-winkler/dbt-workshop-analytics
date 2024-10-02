@@ -112,6 +112,10 @@ semantic_models:
         type: time
         type_params:
           time_granularity: day
+      - name: order_time
+        type: time
+        type_params:
+          time_granularity: minute
 
     measures:
       - name: total_expense
