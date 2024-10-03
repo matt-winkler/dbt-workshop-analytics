@@ -41,6 +41,10 @@ vars:
   vars:
   'dbt_date:time_zone': 'America/Los_Angeles'
 
+
+flags:
+  enable_iceberg_materializations: True
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
