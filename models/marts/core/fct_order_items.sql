@@ -1,6 +1,12 @@
 {{
     config(
-        materialized = 'table',
+        materialized='incremental',
+        incremental_strategy='insert_overwrite',
+        micro_batch = {
+          "event_time": 'date_day',
+          "batch_size": 'day',
+          "lookback_period": '3'
+        },
         tags = ['finance']
     )
 }}
