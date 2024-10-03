@@ -22,7 +22,7 @@ semantic_models:
       - name: order_time
         type: time
         type_params:
-          time_granularity: minute
+          time_granularity: hour
       
       - name: order_status_code
         description: Indicates the status of the order
