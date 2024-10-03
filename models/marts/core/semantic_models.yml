@@ -8,7 +8,7 @@ semantic_models:
       per order and includes the order key
     model: ref('fct_orders')
     defaults:
-      agg_time_dimension: order_date
+      agg_time_dimension: order_time
     
     entities:
       - name: customer_order
@@ -19,10 +19,10 @@ semantic_models:
         expr: customer_key
 
     dimensions:
-      - name: order_date
+      - name: order_time
         type: time
         type_params:
-          time_granularity: day
+          time_granularity: minute
       
       - name: order_status_code
         description: Indicates the status of the order
