@@ -1,7 +1,13 @@
 {{
     config(
-        materialized = 'table',
-        tags=['finance']
+        materialized='incremental',
+        incremental_strategy='microbatch',
+        event_time='order_time',
+        batch_size='day',
+        lookback=0,
+        begin='2018-01-01',
+        full_refresh=False,
+        tags = ['finance']
     )
 }}
 

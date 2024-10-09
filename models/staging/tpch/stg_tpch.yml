@@ -91,6 +91,8 @@ models:
  
   - name: stg_tpch_orders
     description: staging layer for orders data
+    config:
+      event_time: order_date
     columns:
       - name: order_key
         description: primary key of the model

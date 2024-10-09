@@ -1,12 +1,12 @@
 {{
     config(
         materialized='incremental',
-        incremental_strategy='insert_overwrite',
-        micro_batch = {
-          "event_time": 'date_day',
-          "batch_size": 'day',
-          "lookback_period": '3'
-        },
+        incremental_strategy='microbatch',
+        event_time='order_time',
+        batch_size='day',
+        lookback=3,
+        begin='2018-01-01',
+        full_refresh=False,
         tags = ['finance']
     )
 }}
@@ -26,6 +26,7 @@ final as (
         order_item.order_item_key,
         order_item.order_key,
         order_item.order_date,
+        order_item.order_time,
         order_item.customer_key,
         order_item.part_key,
         order_item.supplier_key,
