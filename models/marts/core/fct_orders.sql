@@ -5,8 +5,8 @@
         event_time='order_time',
         batch_size='day',
         lookback=0,
-        begin='2018-01-01',
-        full_refresh=False,
+        begin=microbatch_begin(),
+        full_refresh=True,
         tags = ['finance']
     )
 }}

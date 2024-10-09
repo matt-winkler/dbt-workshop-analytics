@@ -4,9 +4,9 @@
         incremental_strategy='microbatch',
         event_time='order_time',
         batch_size='day',
-        lookback=3,
-        begin='2018-01-01',
-        full_refresh=False,
+        lookback=0,
+        begin=microbatch_begin(),
+        full_refresh=True,
         tags = ['finance']
     )
 }}
