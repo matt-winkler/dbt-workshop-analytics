@@ -42,6 +42,16 @@ vars:
 flags:
   enable_iceberg_materializations: True
 
+dbt-cloud:
+
+  # SA Demo Account (EMEA) - Data Analytics 
+  project-id: "921"
+  defer-env-id: "2057" # Production
+
+  # # SA Demo Sandbox (EMEA) - Data Analytics 
+  # project-id: "1429"
+  # defer-env-id: "2269" # Production
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
