@@ -61,17 +61,17 @@ models:
       - name: is_low_value
         data_type: varchar(1)
         description: low revenue account
-    versions:
-      - v: 1
-        columns:
-          - include: all
-            exclude: [is_high_value,is_mid_value,is_low_value]
-        deprecation_date: 2024-8-31 00:00:00.00+00:00
-      - v: 2
-        columns:
-          - include: all
-            exclude: [tier_name]
-    latest_version: 2
+    # versions:
+    #   - v: 1
+    #     columns:
+    #       - include: all
+    #         exclude: [is_high_value,is_mid_value,is_low_value]
+    #     deprecation_date: 2024-8-31 00:00:00.00+00:00
+    #   - v: 2
+    #     columns:
+    #       - include: all
+    #         exclude: [tier_name]
+    # latest_version: 2
     
   - name: dim_parts
     description: Parts dimensions table
