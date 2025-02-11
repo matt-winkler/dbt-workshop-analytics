@@ -105,7 +105,6 @@ sources:
         count: 90
         period: day
 
-
     tables:
       - name: payments
         description: This table includes details about each payment transaction, such as the payment method, status, and amount.
