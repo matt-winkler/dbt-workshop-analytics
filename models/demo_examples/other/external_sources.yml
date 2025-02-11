@@ -35,6 +35,11 @@ sources:
   - name: jaffle_shop
     description: This is an example of using external sources
     database: analytics
+    freshness:
+      warn_after:
+        count: 50
+        period: day
+
 
     tables:
       - name: customers
@@ -95,6 +100,11 @@ sources:
     description: This is an example of using external sources
     database: analytics
     schema: stripe_external_source
+    freshness:
+      warn_after:
+        count: 90
+        period: day
+
 
     tables:
       - name: payments

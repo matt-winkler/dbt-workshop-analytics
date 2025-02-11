@@ -6,7 +6,7 @@
         batch_size='day',
         lookback=3,
         begin=microbatch_begin(),
-        full_refresh=False,
+        full_refresh=True,
         tags = ['finance']
     )
 }}
