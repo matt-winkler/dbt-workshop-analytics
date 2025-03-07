@@ -119,7 +119,7 @@ semantic_models:
         expr: supplier_cost
 
 saved_queries:
-  - name: revenue_by_region_saved_query
+  - name: revenue_by_nation_saved_query
     description: "Saved query to output total revenue"
     label: Revenue saved query
     config:
@@ -129,7 +129,8 @@ saved_queries:
       metrics:
         - total_revenue
       group_by:
-        - "Dimension('orders__region')"
+        - "Dimension('customer__region')"
+        - "Dimension('customer__nation')"
       where:
         - "{{ Dimension('orders__order_time', 'DAY') }} <= now()"
         - "{{ Dimension('orders__order_time', 'DAY') }} >= '2023-01-01'"
