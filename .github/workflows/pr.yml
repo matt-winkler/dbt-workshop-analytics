@@ -12,7 +12,7 @@ jobs:
 
     env:
       DBT_API_KEY:             ${{ secrets.DBT_API_KEY }}
-      DBT_URL:                 https://cloud.getdbt.com # no trailing backslash. Change this for single tenant deployments to your actual base url
+      DBT_URL:                 https://c2.us1.dbt.com # no trailing backslash. Change this for single tenant deployments to your actual base url
       DBT_JOB_CAUSE:           'Github Actions PR Job' # provide a descriptive job cause here for easy debugging down the road
       DBT_ACCOUNT_ID:          70437463654684
       DBT_PROJECT_ID:          70437463655815
