@@ -81,6 +81,24 @@ metrics:
           alias: expense
 
 saved_queries:
+  - name: metrics_monthly_customers_by_region
+    description: Relevant monthly customers by region
+    config:
+      cache:
+        enabled: true
+    query_params:
+      metrics:
+        - monthly_customers
+      group_by:
+        - TimeDimension('metric_time', 'month')
+        - Dimension('customer__region')
+        - Dimension('customer__nation')
+    exports:
+      - name: monthly_customers_by_region
+        config:
+          export_as: table
+          schema: aa_metrics
+
   - name: metrics_sales_by_region
     description: Relevant sales metrics by region
     config:
