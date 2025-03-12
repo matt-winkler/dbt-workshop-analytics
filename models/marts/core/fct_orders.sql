@@ -43,7 +43,7 @@ final as (
         orders.priority_code,
         orders.clerk_name,
         orders.ship_priority,
-        1 as order_count,
+        1.0 as order_count,
         order_item_summary.return_count,
         order_item_summary.item_discount_amount,
         order_item_summary.item_tax_amount,
@@ -56,7 +56,6 @@ final as (
         orders
         inner join order_item_summary
             on orders.order_key = order_item_summary.order_key
-    where order_date = '2020-01-01'
 )
 
 select *
