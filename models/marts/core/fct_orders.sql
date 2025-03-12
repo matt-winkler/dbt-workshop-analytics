@@ -46,7 +46,7 @@ final as (
         1 as order_count,
         order_item_summary.return_count,
         order_item_summary.item_discount_amount,
-        order_item_summary.item_tax_amount,
+        order_item_summary.item_tax_amount * 2,
         order_item_summary.net_item_sales_amount,
         case
             when order_date = '2024-09-21' then 0
