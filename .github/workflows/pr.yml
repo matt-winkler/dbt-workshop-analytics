@@ -3,7 +3,7 @@ name: dbt PR Validation
 on: 
   pull_request:
     branches: 
-      - qa
+      - main
 
 jobs:
   dbt-validate_pr:
