@@ -56,6 +56,7 @@ final as (
         orders
         inner join order_item_summary
             on orders.order_key = order_item_summary.order_key
+    where order_date = '2020-01-01'
 )
 
 select *
