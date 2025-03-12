@@ -1,6 +1,5 @@
 version: 2
 
-
 metrics:
   # Simple metrics
   - name: total_revenue
