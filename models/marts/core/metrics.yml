@@ -79,9 +79,7 @@ metrics:
         - name: total_expense
           alias: expense
 
-saved_queries:
-
-  
+saved_queries:  
   - name: metrics_sales_by_region
     description: Relevant sales metrics by region
     config:
