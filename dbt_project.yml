@@ -51,8 +51,6 @@ models:
     marts:
       core:
         +materialized: table
-        +grants:  
-          select: ['dashboard_user']
       
 seeds:
   +copy_grants: true
